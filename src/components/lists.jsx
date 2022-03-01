@@ -12,7 +12,6 @@ class Lists extends Component{
         super(props);
         this.state={
             items:[],
-            brands:[],
             files:{},
             clientID:undefined,
         }  
@@ -26,10 +25,7 @@ class Lists extends Component{
             this.setState({items:res.data});
 
         });
-        axios.get(`http://localhost:8000/brand/1`).then(resbrands=>{
-            console.log(resbrands.data);
-            this.setState({brands:resbrands.data});
-        });
+        
         
     }
     deleteRow(id,filename, e){ 
@@ -45,6 +41,7 @@ class Lists extends Component{
       
         }  
     AddToQueue(id,f){ 
+
             console.log(id);
             const b = JSON.stringify({id: id})
             axios.post(`localhost:8000//`,b)  
@@ -53,9 +50,7 @@ class Lists extends Component{
                 console.log(res.data);
                 alert(res.data["msg"]);
               });
-            } 
-
-            
+    } 
 
     render(){ 
         return  <div className="row">
@@ -65,25 +60,25 @@ class Lists extends Component{
                     <input type="text" className="form-control form-control-sm" id="myInput" placeholder="search here" name="" id=""/>
                 </div>
                         <div className="col-sm-4">
-                        <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button type="button" className="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#exampleModalCenter">
                             Create
                         </button>   
                         </div>
                     </div>
                 </div>
 
-            <div className="col-sm-12">
+            <div classNameName="col-sm-12">
                
-               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Publisher Creatives</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <div className="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLongTitle">Add Publisher Creatives</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
                 </div>  
-                <div class="modal-body">
+                <div className="modal-body">
                     <Advertismentform/>
                 </div>
                 </div>
