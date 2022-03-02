@@ -129,8 +129,6 @@ export default class Advertismentform extends React.Component{
                     
                 </div>
             </div>
-
-            
         </div>
 </form>;
     }

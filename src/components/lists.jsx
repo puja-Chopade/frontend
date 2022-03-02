@@ -6,19 +6,28 @@ import 'bootstrap/dist/js/bootstrap.js';
 import axios from 'axios';
 import Advertismentform from "./Advertisementform";
 
-class Lists extends Component{
 
+class Lists extends Component{
     constructor(props){
         super(props);
         this.state={
             items:[],
             files:{},
             clientID:undefined,
+            queue:[],
         }  
-      
+
+    
+
+        
+
     }
 
-     
+
+
+
+
+
     componentDidMount(){
         axios.get(`http://localhost:8000/advertisment/1`).then(res=>{
             console.log(res.data);
@@ -28,28 +37,30 @@ class Lists extends Component{
         
         
     }
-    deleteRow(id,filename, e){ 
-        console.log(id);
-        const body = JSON.stringify({Id: id,file:filename})
-        axios.delete(`localhost:8000/advertisment/`,{data:body})  
-          .then(res => {  
-            console.log(res);  
-            console.log(res.data);
-            alert(res.data["msg"]);
-          });
-          window.location.reload();
-      
-        }  
-    AddToQueue(id,f){ 
 
-            console.log(id);
-            const b = JSON.stringify({id: id})
-            axios.post(`localhost:8000//`,b)  
+    deleteRow(Id,filename,name,e){ 
+    const body = JSON.stringify([{ID: Id,file:filename,clientID:this.state.clientID}])
+        axios.delete(`http://localhost:8000/advertisment/`,{data:body})  
+          .then(res => {  
+            if(res.data["msg"]=="Deleted"){
+                alert(name+" "+"Deleted Successfully")
+                window.location.reload();
+            }else{
+                alert("Not Deleted")
+            }
+          });
+        }  
+    
+    AddToQueue(id,clientId,f){ 
+            const b = JSON.stringify({ID: id,clientID:clientId});
+            axios.post(`http://localhost:8000/queue/`,b)  
               .then(res => {  
-                console.log(res);  
-                console.log(res.data);
-                alert(res.data["msg"]);
-              });
+                if(res.data["msg"]=="Created"){
+                    window.location.reload();
+                }else{
+                    alert("Failed to Add To Queue");
+                }
+            });            
     } 
 
     render(){ 
@@ -91,33 +102,32 @@ class Lists extends Component{
                 <table class="table table-striped">
                     <thead className="bg-info text-white">
                     <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">#ID</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Action</th>                        
+                    <th scope="col"></th>                        
                     </tr>
                     </thead>
                     <tbody id="myTable">
                                     {
                                         this.state.items.map(itemLists=>(
-                                            <tr draggable="true">
+                                            <tr>
                                                 <td>
-                                                    {itemLists.ID}
+                                                   #{itemLists.ID}
                                                 </td>
                                                 <td>
                                                     {itemLists.name}
                                                 </td>
                                                 <td>
-                                                     <div class="dropdown">
-                                                <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Action
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <div className="row justify-content-end">
+                                                        <div className="col-auto">
+                                                        <button className="text-primary btn btn-block btn-sm" onClick={(f) => this.AddToQueue(itemLists.ID,itemLists.clientID,f)} type="button">Add</button>
+                                                        </div>
+                                                        <div className="col-auto">
+                                                     
+                                                             <button className="text-danger close" onClick={(e) => this.deleteRow(itemLists.ID,itemLists.file,itemLists.name,e)} type="button"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                    </div>
                                                     
-                                                    <p class="dropdown-item text-success" onClick={(f) => this.AddToQueue(itemLists.id)} >Add To Queue</p>
-
-                                                    <button class="dropdown-item text-danger" onClick={(e) => this.deleteRow(itemLists.id,itemLists.file, e)} type="button">Delete</button>
-                                                   </div>
-                                                </div>
                                                 </td>
                                             </tr>
                                         ))

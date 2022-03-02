@@ -8,15 +8,14 @@ import { CCarousel } from '@coreui/react'
 import lists from './screen.css';
 
 class Screen extends Component{
-  state={
-    items:[],
-}    
+    state={
+        queue:[],
+    }
 
- 
 componentDidMount(){
     axios.get(`http://localhost:8000/queue/1`).then(res=>{
        
-        this.setState({items:res.data});
+        this.setState({queue:res.data});
 
     });
 }
@@ -26,7 +25,7 @@ componentDidMount(){
                     {
                         this.state.items.map(item=>(
                             <CCarouselItem>
-                            <img className="d-block w-100" src={"http://localhost:8000/"+item.file} alt="slide 1" />
+                            <img className="d-block w-100" src={"http://localhost:8000/files/"+item.file} alt="slide 1" />
                         </CCarouselItem>
                     ))
                 }
