@@ -23,7 +23,12 @@ class Queue extends Component{
     componentDidMount(){
         axios.get(`http://localhost:8000/queue/1`).then(res=>{
             console.log(res.data);
-            this.setState({queue:res.data});
+            if(res.data == null){
+                console.log("null");
+            }else{
+                this.setState({queue:res.data});
+            }
+//            
         });
         
         
@@ -51,19 +56,31 @@ class Queue extends Component{
                 
                 {
                     this.state.queue.map(items=>(
-                        
-                                <div className="col-auto card b">
 
-                                    <div className="container-fluid">
-                                       <img src={"http://localhost:8000/files/"+items.file}></img>
+                            items.AdvType === "Video" ?
+
+                                <div className={"col-auto card b"}>
+
+                                    <div className={"container-fluid"}>
+                                        Videos
                                     </div>
                                   
                                     
-                                    <button className="btn btn-sm btn-danger" onClick={(e) => this.deleteQueue(items.id, e)}>
+                                    <button className={"btn btn-sm btn-danger"} onClick={(e) => this.deleteQueue(items.id, e)}>
                                       
                                      Delete
                                     </button>
                                 </div>
+                                :
+                                <div className={"col-auto card b"}>
+
+                                <div className={"container-fluid"}>
+                                <img src={"http://localhost:8000/"+items.file}></img>
+                                </div>
+                                <button className={"btn btn-sm btn-danger"} onClick={(e) => this.deleteQueue(items.id, e)}>
+                                 Delete
+                                </button>
+                            </div>
                     ))
                 }
           </div>

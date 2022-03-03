@@ -15,10 +15,18 @@ function App() {
         <div className='col-12 col-sm-4'>
             <Lists></Lists>
         </div>
+        <div className={"col-sm-8 col-12 bg-danger"}>
+          <div className={"row bg-info"}>
+          <div className={"col-sm-8 col-12 bg-success"}>
+          <Screen></Screen>
+        </div>
         
-          <div className="col-sm-8 col-12">
+          <div className={"col-sm-8 col-12"}>
             <Queue></Queue>
           </div>
+
+          </div>
+        </div>
         
       </div>
      
