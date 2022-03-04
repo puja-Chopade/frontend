@@ -29,7 +29,7 @@ class Lists extends Component{
 
 
     componentDidMount(){
-        axios.get(`http://localhost:8000/advertisment/1`).then(res=>{
+        axios.get(`http://13.234.48.68:8000/advertisment/1`).then(res=>{
             console.log(res.data);
             this.setState({items:res.data});
 
@@ -40,7 +40,7 @@ class Lists extends Component{
 
     deleteRow(Id,filename,name,e){ 
     const body = JSON.stringify([{ID: Id,file:filename,clientID:this.state.clientID}])
-        axios.delete(`http://localhost:8000/advertisment/`,{data:body})  
+        axios.delete(`http://13.234.48.68:8000/advertisment/`,{data:body})  
           .then(res => {  
             if(res.data["msg"]=="Deleted"){
                 alert(name+" "+"Deleted Successfully")
@@ -53,7 +53,7 @@ class Lists extends Component{
     
     AddToQueue(id,clientId,f){ 
             const b = JSON.stringify({ID: id,clientID:clientId});
-            axios.post(`http://localhost:8000/queue/`,b)  
+            axios.post(`http://13.234.48.68:8000/queue/`,b)  
               .then(res => {  
                 if(res.data["msg"]=="Created"){
                     window.location.reload();

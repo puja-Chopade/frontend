@@ -13,7 +13,7 @@ export default class Advertismentform extends React.Component{
 
     }
     componentDidMount(){
-    axios.get(`http://localhost:8000/brand/1`).then(resbrands=>{
+    axios.get(`http://13.234.48.68:8000/brand/1`).then(resbrands=>{
         console.log(resbrands.data);
         this.setState({brands:resbrands.data});
     });
@@ -48,7 +48,7 @@ export default class Advertismentform extends React.Component{
         formData.append("creativeType",CreativeType);
         formData.append("AdvType",AdvType);
      
-        axios.post("http://localhost:8000/advertisment/",formData,{headers: {'Content-Type':'multipart/form-data'}}).then(res=>{
+        axios.post("http://13.234.48.68:8000/advertisment/",formData,{headers: {'Content-Type':'multipart/form-data'}}).then(res=>{
             console.log("posted");
             console.log(res.data);
             if(res.data["msg"]=="created"){

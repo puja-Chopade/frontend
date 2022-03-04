@@ -21,7 +21,7 @@ class Queue extends Component{
     }
 
     componentDidMount(){
-        axios.get(`http://localhost:8000/queue/1`).then(res=>{
+        axios.get(`http://13.234.48.68:8000/queue/1`).then(res=>{
             console.log(res.data);
             if(res.data == null){
                 console.log("null");
@@ -38,7 +38,7 @@ class Queue extends Component{
 
     deleteQueue(id, e){ 
     const data = JSON.stringify({id: id})
-    axios.delete(`http://localhost:8000/queue/`,{data:data})  
+    axios.delete(`http://13.234.48.68:8000/queue/`,{data:data})  
       .then(res => {  
         if(res.data["msg"]=="Deleted"){
            window.location.reload();

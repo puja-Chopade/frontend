@@ -16,7 +16,7 @@ class Screen extends Component{
    }
 
    componentDidMount(){
-    axios.get(`http://localhost:8000/queue/1`).then(res=>{
+    axios.get(`http://13.234.48.68:8000/queue/1`).then(res=>{
         console.log(res.data);
         if(res.data == null){
             console.log("null");
@@ -32,7 +32,7 @@ class Screen extends Component{
         {
             this.state.queues.map(item=>(
                 <CCarouselItem>
-                <img className={"queueImg"} src={"http://localhost:8000/"+item.file} alt="slide 1" />
+                <img className={"queueImg"} src={"http://13.234.48.68:8000/"+item.file} alt="slide 1" />
             </CCarouselItem>
         ))
     }
