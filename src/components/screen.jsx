@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { CCarouselItem } from '@coreui/react';
 import { CCarousel } from '@coreui/react';
 
-
+import React from 'react'
 
 class Screen extends Component{
    constructor(props){

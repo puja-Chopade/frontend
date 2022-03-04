@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 //import SearchBar from "./searchbar";
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+//import 'bootstrap/dist/js/bootstrap.js';
 import axios from 'axios';
 import Advertismentform from "./Advertisementform";
 
